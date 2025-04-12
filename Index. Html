@@ -1,0 +1,29 @@
+# PVROAR-<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>PVROAR</title>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>  
+</head>  
+<body>  
+  <script>  
+    // Basic car movement (tested on mobile)  
+    const scene = new THREE.Scene();  
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);  
+    const renderer = new THREE.WebGLRenderer();  
+    renderer.setSize(window.innerWidth, window.innerHeight);  
+    document.body.appendChild(renderer.domElement);  
+
+    const car = new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ color: 0xff0000 }));  
+    scene.add(car);  
+    camera.position.z = 5;  
+
+    // TOUCH CONTROLS  
+    document.addEventListener('touchmove', (e) => {  
+      car.position.x = (e.touches[0].clientX / window.innerWidth) * 10 - 5;  
+    });  
+
+    function animate() { requestAnimationFrame(animate); renderer.render(scene, camera); }  
+    animate();  
+  </script>  
+</body>  
+</html>  
